@@ -1,4 +1,3 @@
-import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,18 +33,41 @@ public class DraftTest {
         InboxPage inboxPage = new InboxPage(webDriver);
         inboxPage.writeMailAction();
 
-        NewLetter newLetter = new NewLetter(webDriver);
+        NewLetterPage newLetterPage = new NewLetterPage(webDriver);
         Letter letter = new Letter(TO, SUBJECT, BODY);
-        newLetter.fillLetter(letter);
-        newLetter.saveDraftAction();
+        newLetterPage.fillLetter(letter);
+        newLetterPage.saveDraftAction();
 
         Thread.sleep(4000);
-        newLetter.draftAction();
+        newLetterPage.draftAction();
         Thread.sleep(3000);
-        MailList mailList = new MailList(webDriver);
-        mailList.getLetter(0).click();
+        LettersContainer lettersContainer = new LettersContainer(webDriver);
+        lettersContainer.getLetter(0).click();
         Thread.sleep(3000);
-        Letter actualLetter = newLetter.getLetter();
+        Letter actualLetter = newLetterPage.getLetter();
+
+        assertEquals(letter, actualLetter);
+    }
+
+    @Test
+    public void testNewMail() throws Exception {
+        InboxPage inboxPage = new InboxPage(webDriver);
+        inboxPage.writeMailAction();
+
+        NewLetterPage newLetterPage = new NewLetterPage(webDriver);
+        Letter letter = new Letter(TO, SUBJECT, BODY);
+        newLetterPage.fillLetter(letter);
+
+        newLetterPage.sendMailAction();
+
+        Thread.sleep(4000);
+        newLetterPage.sendedAction();
+        Thread.sleep(3000);
+        LettersContainer lettersContainer = new LettersContainer(webDriver);
+        lettersContainer.getLetter(0).click();
+        Thread.sleep(3000);
+        SentLetterPage sentLetterPage = new SentLetterPage(webDriver);
+        Letter actualLetter = sentLetterPage.getLetter();
 
         assertEquals(letter, actualLetter);
     }

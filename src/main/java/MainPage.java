@@ -5,15 +5,11 @@ import org.openqa.selenium.WebElement;
 public class MainPage {
 
     private WebElement writeMailButton;
-    private WebElement draftButton;
-    private WebElement sendedButton;
     protected WebDriver webDriver;
 
     public MainPage(WebDriver webDriver) {
         this.webDriver = webDriver;
         writeMailButton = webDriver.findElement(By.cssSelector(".b-toolbar__item"));
-        draftButton = webDriver.findElement(By.cssSelector("a[href='/messages/drafts/']"));
-        sendedButton = webDriver.findElement(By.xpath("//span[.='Отправленные']"));
     }
 
     public void writeMailAction() {
@@ -21,10 +17,10 @@ public class MainPage {
     }
 
     public void draftAction() {
-        draftButton.click();
+        webDriver.findElement(By.xpath("//span[text()='Черновики']")).click();
     }
 
     public void sendedAction() {
-        sendedButton.click();
+        webDriver.findElement(By.xpath("//span[text()='Отправленные']")).click();
     }
 }

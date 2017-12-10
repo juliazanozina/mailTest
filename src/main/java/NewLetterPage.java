@@ -2,7 +2,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class NewLetter extends MainPage{
+public class NewLetterPage extends MainPage{
 
     private WebElement to;
     private WebElement subject;
@@ -11,15 +11,21 @@ public class NewLetter extends MainPage{
     private WebElement save;
     private WebElement saveDraft;
     private WebElement tempDraftLink;
+    private WebElement sendMail;
 
-    public NewLetter(WebDriver webDriver){
+    public NewLetterPage(WebDriver webDriver){
         super(webDriver);
         to = webDriver.findElement(By.cssSelector("textarea[data-original-name='To']"));
         subject = webDriver.findElement(By.cssSelector("input[name='Subject']"));
         switchToPlainTxt = webDriver.findElement(By.xpath("//span[.='Убрать оформление']"));
         body = webDriver.findElement(By.cssSelector("textarea[name='Body']"));
         save = webDriver.findElement(By.cssSelector("div[data-group='save-more']"));
+        sendMail = webDriver.findElement(By.xpath("//span[.='Отправить']"));
 }
+
+    public void sendMailAction(){
+        sendMail.click();
+    }
 
     public void fillTo(String text){
         to.clear();
