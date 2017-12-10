@@ -38,12 +38,12 @@ public class DraftTest {
         newLetterPage.fillLetter(letter);
         newLetterPage.saveDraftAction();
 
-        Thread.sleep(4000);
+        Thread.sleep(1000);
         newLetterPage.draftAction();
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         LettersContainer lettersContainer = new LettersContainer(webDriver);
         lettersContainer.getLetter(0).click();
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         Letter actualLetter = newLetterPage.getLetter();
 
         assertEquals(letter, actualLetter);
@@ -60,12 +60,12 @@ public class DraftTest {
 
         newLetterPage.sendMailAction();
 
-        Thread.sleep(4000);
-        newLetterPage.sendedAction();
         Thread.sleep(3000);
+        newLetterPage.sendedAction();
+        Thread.sleep(1000);
         LettersContainer lettersContainer = new LettersContainer(webDriver);
         lettersContainer.getLetter(0).click();
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         SentLetterPage sentLetterPage = new SentLetterPage(webDriver);
         Letter actualLetter = sentLetterPage.getLetter();
 
